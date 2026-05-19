@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentine Website 💗</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffb6c1, #ffc0cb, #ffe4e1);
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.75);
+      padding: 35px 25px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+      width: 90%;
+      max-width: 420px;
+      position: relative;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 105, 180, 0.2);
+      z-index: 10;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: #ff2e93;
+      margin-bottom: 15px;
+      text-shadow: 0 2px 10px rgba(255, 46, 147, 0.25);
+    }
+
+    p {
+      color: #b8005d;
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+    }
+
+    .gif {
+      width: 170px;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 3px solid rgba(255, 46, 147, 0.25);
+      box-shadow: 0 10px 25px rgba(255, 105, 180, 0.25);
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 12px 22px;
+      font-size: 1.05rem;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font-weight: 600;
+    }
+
+    #yesBtn {
+      background: #ff2e93;
+      color: white;
+      box-shadow: 0 10px 20px rgba(255, 46, 147, 0.35);
+    }
+
+    #noBtn {
+      background: #ffffff;
+      color: #ff2e93;
+      border: 2px solid #ff2e93;
+      position: absolute;
+      left: 55%;
+      top: 78%;
+    }
+
+    .loveText-container {
+      margin-top: 20px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      animation: pop 0.5s ease;
+    }
+
+    .loveText {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #ff0a7f;
+    }
+
+    .next-arrow {
+      background: #ff2e93;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.5rem;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(255, 46, 147, 0.3);
+    }
+
+    /* Second Page Styling */
+    #secondPage {
+      display: none;
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    .heart-paper {
+      background: white;
+      width: 250px;
+      height: 250px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      clip-path: path('M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402m5.726-20.583c-2.203 0-4.446 1.042-5.726 3.238-1.285-2.206-3.522-3.248-5.719-3.248-3.183 0-6.281 2.187-6.281 6.191 0 4.661 5.571 9.429 12 15.809 6.43-6.38 12-11.148 12-15.809 0-4.011-3.095-6.181-6.274-6.181');
+      transform: scale(10); /* Scaling the path to be big */
+      background-color: white;
+    }
+
+    /* Simple Heart Shape using CSS */
+    .heart-note {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      background-color: white;
+      transform: rotate(-45deg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      animation: heartPop 0.8s ease-out;
+    }
+
+    .heart-note::before,
+    .heart-note::after {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background-color: white;
+      border-radius: 50%;
+    }
+
+    .heart-note::before { top: -100px; left: 0; }
+    .heart-note::after { left: 100px; top: 0; }
+
+    .ily-text {
+      margin-bottom: 20px;
+      position: absolute;
+      transform: rotate(45deg);
+      font-size: 20px;
+      font-weight: bold;
+      color: #ff2e93;
+      z-index: 5;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes heartPop {
+      0% { transform: rotate(-45deg) scale(0); }
+      80% { transform: rotate(-45deg) scale(1.1); }
+      100% { transform: rotate(-45deg) scale(1); }
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 22px;
+      animation: float 6s linear infinite;
+      opacity: 0.8;
+      z-index: 1;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-110vh) scale(1.6); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Page 1: Invitation -->
+  <div class="card" id="firstPage">
+    <h1>Love You</h1>
+    <p>ကျနော့်ကို အမရဲ့ ချစ်သူဖြစ်ခွင့်ပေးနိုင်မလားဗျ🙇🙇</p>
+
+ 
+    <img class="gif" src="bu1.gif" alt="Valentine Gif" onerror="this.src='https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpndWp3ZzZueW54bm93YXpueGZ4bm93YXpueGZ4bm93YXpueGZ4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/K75S6LzTMBmR8OtcW7/giphy.gif'"/>
+
+    <div class="buttons">
+      <button id="yesBtn">Yesss 💖</button>
+    </div>
+
+    <button id="noBtn">Nooo 😭</button>
+
+    <div class="loveText-container" id="loveAction">
+      <span class="loveText">Yesကိုနှိပ်တာ ကျနော့်အချစ်ကိုလက်ခံတာလား‌ဗျ 💕</span>
+      
+    </div>
+  </div>
+
+
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const loveAction = document.getElementById("loveAction");
+    const firstPage = document.getElementById("firstPage");
+    const secondPage = document.getElementById("secondPage");
+
+    yesBtn.addEventListener("click", () => {
+      loveAction.style.display = "flex";
+      noBtn.style.display = "none"; // Hide No button when Yes is clicked
+    });
+
+    function goToNextPage() {
+      firstPage.style.display = "none";
+      secondPage.style.display = "block";
+    }
+
+    // Move NO button
+    function moveNoButton() {
+      const card = document.querySelector(".card");
+      const cardRect = card.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const maxX = cardRect.width - btnRect.width - 20;
+      const maxY = cardRect.height - btnRect.height - 20;
+
+      let randomX = Math.floor(Math.random() * maxX);
+      let randomY = Math.floor(Math.random() * maxY);
+
+      noBtn.style.left = randomX + "px";
+      noBtn.style.top = randomY + "px";
+    }
+
+    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.addEventListener("touchstart", moveNoButton);
+
+    // Floating Hearts effect
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💗";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.bottom = "-20px";
+      heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => { heart.remove(); }, 6000);
+    }
+
+    setInterval(createHeart, 500);
+  </script>
+</body>
+</html>
